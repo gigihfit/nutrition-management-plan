@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const nutritionSchema = new mongoose.Schema({
   food: {
-    type: Number,
+    type: String,
     required: true,
   },
   calorie: {
