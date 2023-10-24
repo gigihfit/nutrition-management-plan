@@ -5,7 +5,14 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 // import mongoose
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1:27017/db_gigih_capstone');
+mongoose
+  .connect('mongodb://127.0.0.1:27017/db_gigih_capstone')
+  .then((res) => {
+    console.log('Database terhubung!');
+  })
+  .catch((err) => {
+    console.log('Tidak terhubung dengan database!');
+  });
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -24,7 +31,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/api/users', usersRouter);
 app.use('/api', apiRouter);
 
 // catch 404 and forward to error handler
