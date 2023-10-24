@@ -22,7 +22,9 @@ module.exports = {
     } catch (error) {
       console.log(error);
 
-      return res.status(500).json({ message: 'Registration failed' });
+      return res
+        .status(500)
+        .json({ message: 'Registration failed', error: error });
     }
   },
 };
