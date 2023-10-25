@@ -20,8 +20,6 @@ module.exports = {
 
       return res.status(201).json(userData);
     } catch (error) {
-      console.log(error);
-
       return res
         .status(500)
         .json({ message: 'Registration failed', error: error });
