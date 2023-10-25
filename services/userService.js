@@ -21,18 +21,15 @@ module.exports = {
     }
   },
 
-  async loginUser(userData) {
+  async loginUser(email, password) {
     try {
-      const user = await User.findOne({ email: userData.email });
+      const user = await User.findOne({ email: email });
 
       if (!user) {
         throw new Error('User not found');
       }
 
-      const isPasswordValid = await bcrypt.compare(
-        userData.password,
-        user.password
-      );
+      const isPasswordValid = await bcrypt.compare(password, user.password);
 
       if (!isPasswordValid) {
         throw new Error('Invalid Password');
