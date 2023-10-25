@@ -14,17 +14,16 @@ module.exports = {
       const existingUser = await User.findOne({ email: userData.email });
 
       if (existingUser) {
-        return res.status(400).json({ message: 'Email is already in use' });
+        return errorResponse(res, 'Email is already in use', 400);
       }
 
       const user = await userService.registerUser(userData);
 
       user.password = undefined;
-      return successResponse(res, user, 'Registered successfuly');
+
+      return successResponse(res, user, 'Registered successfuly', 201);
     } catch (error) {
-      return res
-        .status(500)
-        .json({ message: 'Registration failed', error: error });
+      return errorResponse(res, 'Registration failed', 500);
     }
   },
 
@@ -34,9 +33,9 @@ module.exports = {
     try {
       const user = await userService.loginUser(email, password);
 
-      return res.status(200).json(user);
+      return successResponse(res, user, 'Login Successfuly');
     } catch (error) {
-      return res.status(401).json({ message: 'Login failed' });
+      return errorResponse(res, 'Login failed', 401);
     }
   },
 };
