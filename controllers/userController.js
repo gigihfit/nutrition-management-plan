@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const { errorResponse, successResponse } = require('../responses/response');
 const userService = require('../services/userService');
 
 module.exports = {
@@ -18,7 +19,8 @@ module.exports = {
 
       const user = await userService.registerUser(userData);
 
-      return res.status(201).json(userData);
+      user.password = undefined;
+      return successResponse(res, user, 'Registered successfuly');
     } catch (error) {
       return res
         .status(500)
