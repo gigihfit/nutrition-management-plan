@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const { errorResponse, successResponse } = require('../responses/response');
 const userService = require('../services/userService');
 
 module.exports = {
@@ -13,18 +14,28 @@ module.exports = {
       const existingUser = await User.findOne({ email: userData.email });
 
       if (existingUser) {
-        return res.status(400).json({ message: 'Email is already in use' });
+        return errorResponse(res, 'Email is already in use', 400);
       }
 
       const user = await userService.registerUser(userData);
 
-      return res.status(201).json(userData);
-    } catch (error) {
-      console.log(error);
+      user.password = undefined;
 
-      return res
-        .status(500)
-        .json({ message: 'Registration failed', error: error });
+      return successResponse(res, user, 'Registered successfuly', 201);
+    } catch (error) {
+      return errorResponse(res, 'Registration failed', 500);
+    }
+  },
+
+  async loginUser(req, res) {
+    const { email, password } = req.body;
+
+    try {
+      const user = await userService.loginUser(email, password);
+
+      return successResponse(res, user, 'Login Successfuly');
+    } catch (error) {
+      return errorResponse(res, 'Login failed', 401);
     }
   },
 };
