@@ -1,6 +1,9 @@
 const User = require('../models/User');
 const { errorResponse, successResponse } = require('../responses/response');
 const userService = require('../services/userService');
+const jwt = require('jsonwebtoken');
+const expressJwt = require('express-jwt');
+const { secretKey } = require('../config/config');
 
 module.exports = {
   viewUser: (req, res) => {
@@ -33,7 +36,15 @@ module.exports = {
     try {
       const user = await userService.loginUser(email, password);
 
-      return successResponse(res, user, 'Login Successfuly');
+      const token = jwt.sign(
+        { sub: user._id, username: user.username },
+        secretKey,
+        {
+          expiresIn: '1h',
+        }
+      );
+
+      return successResponse(res, { user, token }, 'Login Successfuly');
     } catch (error) {
       return errorResponse(res, 'Login failed', 401);
     }
