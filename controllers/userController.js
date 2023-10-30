@@ -49,4 +49,11 @@ module.exports = {
       return errorResponse(res, 'Login failed', 401);
     }
   },
+
+  async BMICalculation(req, res) {
+    const userData = req.user;
+    const requestData = req.body;
+
+    
+  },
 };
