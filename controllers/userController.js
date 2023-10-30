@@ -49,4 +49,17 @@ module.exports = {
       return errorResponse(res, 'Login failed', 401);
     }
   },
+
+  async BMICalculation(req, res) {
+    const userData = req.user;
+    const requestData = req.body;
+
+    try {
+      const response = await userService.BMICalculation(userData, requestData);
+
+      return successResponse(res, response, 'OK');
+    } catch (errror) {
+      return errorResponse(res, error, 500);
+    }
+  },
 };
