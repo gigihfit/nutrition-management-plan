@@ -1,5 +1,7 @@
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
+const { successResponse } = require('../responses/response');
+const HealthData = require('../models/HealthData');
 
 module.exports = {
   async registerUser(userData) {
@@ -41,5 +43,26 @@ module.exports = {
     }
   },
 
-  
+  async BMICalculation(userData, requestData) {
+    try {
+      const user = await User.findOne({ username: userData.username });
+      const height = requestData.height;
+      const weight = requestData.weight;
+
+      const bmi = weight / (height * height);
+
+      const healthData = new HealthData({
+        height: height,
+        weight: weight,
+        BMI: bmi,
+        userId: user._id,
+      });
+
+      await healthData.save();
+
+      return healthData;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
