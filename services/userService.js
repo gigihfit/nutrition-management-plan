@@ -1,6 +1,5 @@
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
-const { successResponse } = require('../responses/response');
 const HealthData = require('../models/HealthData');
 
 module.exports = {
