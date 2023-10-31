@@ -5,5 +5,6 @@ const nutritionController = require('../controllers/nutritionController');
 
 /* GET users listing. */
 router.post('/add', checkIsLoggedIn, nutritionController.addNutrition);
+router.put('/update/:id', checkIsLoggedIn, nutritionController.updateNutrition);
 
 module.exports = router;
