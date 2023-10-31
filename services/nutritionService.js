@@ -19,4 +19,18 @@ module.exports = {
       throw error;
     }
   },
+
+  async updateNutritionData(id, nutritionData) {
+    try {
+      const updatedNutrition = await Nutrition.findByIdAndUpdate(
+        id,
+        nutritionData,
+        { new: true }
+      );
+
+      return updatedNutrition;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
