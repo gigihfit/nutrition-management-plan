@@ -22,7 +22,7 @@ module.exports = {
         return errorResponse(res, 'Nutrition data not found!', 404);
       }
 
-      return successResponse(res, 'OK');
+      return successResponse(res, nutritionData);
     } catch (error) {
       return errorResponse(res, 'Internal server error', 500);
     }
