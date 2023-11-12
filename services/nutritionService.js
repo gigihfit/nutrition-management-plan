@@ -11,6 +11,16 @@ module.exports = {
     }
   },
 
+  async getDetailNutrition(id) {
+    try {
+      const nutritionData = await Nutrition.findById(id);
+
+      return nutritionData;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async addNutrition(nutritionData) {
     try {
       const nutrition = new Nutrition({

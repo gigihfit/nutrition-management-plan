@@ -12,6 +12,22 @@ module.exports = {
     }
   },
 
+  async getDetailNutrition(req, res) {
+    const { id } = req.params;
+
+    try {
+      const nutritionData = await nutritionService.getDetailNutrition(id);
+
+      if (!nutritionData) {
+        return errorResponse(res, 'Nutrition data not found!', 404);
+      }
+
+      return successResponse(res, 'OK');
+    } catch (error) {
+      return errorResponse(res, 'Internal server error', 500);
+    }
+  },
+
   async addNutrition(req, res) {
     const nutritionData = req.body;
 
