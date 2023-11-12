@@ -2,6 +2,16 @@ const { successResponse, errorResponse } = require('../responses/response');
 const nutritionService = require('../services/nutritionService');
 
 module.exports = {
+  async getAllNutritionData(req, res) {
+    try {
+      const nutritionData = await nutritionService.getAllNutritionData();
+
+      return successResponse(res, nutritionData, 200);
+    } catch (error) {
+      return errorResponse(res, 'Internal server error', 500);
+    }
+  },
+
   async addNutrition(req, res) {
     const nutritionData = req.body;
 
