@@ -1,6 +1,16 @@
 const Nutrition = require('../models/Nutrition');
 
 module.exports = {
+  async getAllNutritionData() {
+    try {
+      const nutritionData = await Nutrition.find();
+
+      return nutritionData;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async addNutrition(nutritionData) {
     try {
       const nutrition = new Nutrition({
