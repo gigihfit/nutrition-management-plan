@@ -27,11 +27,15 @@ module.exports = {
   },
   async updateExercise(id, exerciseData) {
     try {
-      const exercise = await Exercise.findById(id);
+      const updatedExercise = await Exercise.findByIdAndUpdate(
+        id,
+        exerciseData,
+        {
+          new: true,
+        }
+      );
 
-      if (!exercise) {
-        
-      }
+      return updatedExercise;
     } catch (error) {
       throw error;
     }

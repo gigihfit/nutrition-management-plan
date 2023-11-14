@@ -28,4 +28,29 @@ module.exports = {
       return errorResponse(res, 'Internal server error', 500);
     }
   },
+
+  async updateExercise(req, res) {
+    const { id } = req.params;
+    const exerciseData = req.body;
+
+    try {
+      const updatedExercise = await excerciseService.updateExercise(
+        id,
+        exerciseData
+      );
+
+      if (!updatedExercise) {
+        return errorResponse(res, 'Exercise data not found', 404);
+      }
+
+      return successResponse(
+        res,
+        updatedExercise,
+        'Exercise updated successfuly',
+        200
+      );
+    } catch (error) {
+      return errorResponse(res, 'Internal server error, 500');
+    }
+  },
 };

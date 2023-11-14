@@ -15,5 +15,12 @@ router.post(
   validate,
   excerciseController.addExercise
 );
+router.put(
+  '/update/:id',
+  checkIsLoggedIn,
+  validateExerciseData,
+  validate,
+  excerciseController.updateExercise
+);
 
 module.exports = router;
