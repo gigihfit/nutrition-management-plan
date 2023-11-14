@@ -53,4 +53,14 @@ module.exports = {
       throw error;
     }
   },
+
+  async deleteNutritionData(id) {
+    try {
+      const deletedNutrition = await Nutrition.findByIdAndDelete(id);
+
+      return deletedNutrition;
+    } catch (error) {
+      throw error;
+    }
+  },
 };

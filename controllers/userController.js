@@ -4,6 +4,7 @@ const userService = require('../services/userService');
 const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
 const { secretKey } = require('../config/config');
+const nutritionService = require('../services/nutritionService');
 
 module.exports = {
   viewUser: (req, res) => {
@@ -60,6 +61,22 @@ module.exports = {
       return successResponse(res, response, 'OK');
     } catch (errror) {
       return errorResponse(res, error, 500);
+    }
+  },
+
+  async deleteNutritionData(req, res) {
+    const { id } = req.params;
+
+    try {
+      const deletedNutrition = await nutritionService.deleteNutritionData(id);
+
+      if (!deletedNutrition) {
+        return errorResponse(res, 'Nutrition data not found!', 404);
+      }
+
+      return successResponse(res, '', 'Delete nutrition data successfuly');
+    } catch (error) {
+      return errorResponse(res, 'Internal server error', 500);
     }
   },
 };
