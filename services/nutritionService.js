@@ -1,6 +1,26 @@
 const Nutrition = require('../models/Nutrition');
 
 module.exports = {
+  async getAllNutritionData() {
+    try {
+      const nutritionData = await Nutrition.find();
+
+      return nutritionData;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getDetailNutrition(id) {
+    try {
+      const nutritionData = await Nutrition.findById(id);
+
+      return nutritionData;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async addNutrition(nutritionData) {
     try {
       const nutrition = new Nutrition({
@@ -29,6 +49,16 @@ module.exports = {
       );
 
       return updatedNutrition;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async deleteNutritionData(id) {
+    try {
+      const deletedNutrition = await Nutrition.findByIdAndDelete(id);
+
+      return deletedNutrition;
     } catch (error) {
       throw error;
     }
