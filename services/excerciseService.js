@@ -10,6 +10,17 @@ module.exports = {
       throw error;
     }
   },
+
+  async getDetailExercise(id) {
+    try {
+      const exerciseData = await Exercise.findById(id);
+
+      return exerciseData;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async addExercise(exerciseData) {
     try {
       const exercise = new Exercise({
@@ -36,6 +47,15 @@ module.exports = {
       );
 
       return updatedExercise;
+    } catch (error) {
+      throw error;
+    }
+  },
+  async deleteExercise(id) {
+    try {
+      const deletedExercise = await Exercise.findByIdAndDelete(id);
+
+      return deletedExercise;
     } catch (error) {
       throw error;
     }
