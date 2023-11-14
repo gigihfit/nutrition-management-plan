@@ -14,6 +14,9 @@ const healthDataSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  level: {
+    type: String,
+  },
   userId: {
     type: ObjectId,
     ref: 'User',

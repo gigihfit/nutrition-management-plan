@@ -59,7 +59,8 @@ module.exports = {
       const response = await userService.BMICalculation(userData, requestData);
 
       return successResponse(res, response, 'OK');
-    } catch (errror) {
+    } catch (error) {
+      console.log(error);
       return errorResponse(res, error, 500);
     }
   },
