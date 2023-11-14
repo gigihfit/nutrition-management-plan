@@ -40,4 +40,13 @@ module.exports = {
       throw error;
     }
   },
+  async deleteExercise(id) {
+    try {
+      const deletedExercise = await Exercise.findByIdAndDelete(id);
+
+      return deletedExercise;
+    } catch (error) {
+      throw error;
+    }
+  },
 };

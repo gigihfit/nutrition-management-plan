@@ -53,4 +53,20 @@ module.exports = {
       return errorResponse(res, 'Internal server error, 500');
     }
   },
+
+  async deleteExercise(req, res) {
+    const { id } = req.params;
+
+    try {
+      const deletedExercise = await excerciseService.deleteExercise(id);
+
+      if (!deletedExercise) {
+        return errorResponse(res, 'Exercise data not found', 404);
+      }
+
+      return successResponse(res, '', 'Exercise Deleted successfuly', 200);
+    } catch (error) {
+      return errorResponse(res, 'Internal server error, 500');
+    }
+  },
 };

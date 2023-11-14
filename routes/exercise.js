@@ -22,5 +22,10 @@ router.put(
   validate,
   excerciseController.updateExercise
 );
+router.delete(
+  '/delete/:id',
+  checkIsLoggedIn,
+  excerciseController.deleteExercise
+);
 
 module.exports = router;
