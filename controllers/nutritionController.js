@@ -6,7 +6,7 @@ module.exports = {
     try {
       const nutritionData = await nutritionService.getAllNutritionData();
 
-      return successResponse(res, nutritionData, 200);
+      return successResponse(res, nutritionData, '', 200);
     } catch (error) {
       return errorResponse(res, 'Internal server error', 500);
     }
