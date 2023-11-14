@@ -12,6 +12,22 @@ module.exports = {
     }
   },
 
+  async getDetailExercise(req, res) {
+    try {
+      const { id } = req.params;
+
+      const exerciseData = await excerciseService.getDetailExercise(id);
+
+      if (!exerciseData) {
+        return errorResponse(res, 'Exercise data not found', 404);
+      }
+
+      return successResponse(res, exerciseData, 200);
+    } catch (error) {
+      return errorResponse(res, 'Internal server error', 500);
+    }
+  },
+
   async addExercise(req, res) {
     const exerciseData = req.body;
 

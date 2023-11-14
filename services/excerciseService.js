@@ -10,6 +10,17 @@ module.exports = {
       throw error;
     }
   },
+
+  async getDetailExercise(id) {
+    try {
+      const exerciseData = await Exercise.findById(id);
+
+      return exerciseData;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async addExercise(exerciseData) {
     try {
       const exercise = new Exercise({

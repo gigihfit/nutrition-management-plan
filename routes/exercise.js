@@ -8,6 +8,7 @@ const {
 } = require('../validation/exerciseValidation');
 
 router.get('/', checkIsLoggedIn, excerciseController.getAllExerciseData);
+router.get('/:id', checkIsLoggedIn, excerciseController.getDetailExercise);
 router.post(
   '/add',
   checkIsLoggedIn,
